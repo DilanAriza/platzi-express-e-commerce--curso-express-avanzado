@@ -1,7 +1,23 @@
 const fs = require('fs')
 
-function getRenderedContent(content, objectOptions) {
+function getKeysFromOptions(options) {
+    const { setting, _locals, ...objectKeys } = options;
+    return Object.keys(objectKeys);
+}
 
+function getRenderedContent(content, objectOptions) {
+    const keys = getKeysFromOptions(objectOptions);
+
+    let contentString = content.toString();
+
+    for (let key of keys) {
+        contentString = contentString.replace(
+            new RegExp(`\{${key}\}`, "gi"),
+            objectOptions[key]
+        );
+    }
+
+    return contentString;
 }
 
 function expressJsx(filepath, options, callback) {
