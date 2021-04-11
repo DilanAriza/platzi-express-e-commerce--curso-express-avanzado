@@ -4,8 +4,15 @@ const app = express();
 const path = require('path');
 
 //Middlwares
+app.use("/static",
+    express.static(
+        path.join(__dirname, "public")
+    )
+)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
+
+//Engine views
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "pug");
 
