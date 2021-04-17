@@ -1,33 +1,40 @@
 // Libs
 const express = require('express');
-const app = express();
 const path = require('path');
 
-//Middlwares
+//Routes
+const productsRouter = require('./routes/views/products.view'); // View Products
+const productsApiRouter = require('./routes/api/products.routes'); // Api Products
+
+//app
+const app = express();
+
+// MIDDLWARES
+//Json API Integred
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
+
+//Static files
 app.use("/static",
     express.static(
         path.join(__dirname, "public")
     )
 )
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
 
 //Engine views
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "pug");
 
-//Routes files
-const productsRouter = require('./routes/products');
-const productsApiRouter = require('./routes/api/products');
-
-app.get('/', function(req, res, next) {
-    res.send({ Hello: "World" });
+//Redirect
+app.get('/', function(req, res) {
+    res.redirect('/products');
 })
 
 //Render routes
 app.use('/products', productsRouter);
 app.use("/api/products", productsApiRouter);
 
+//Server init
 const server = app.listen(8000, function() {
     console.log(`Listening http://localhost:${server.address().port}`);
 })
