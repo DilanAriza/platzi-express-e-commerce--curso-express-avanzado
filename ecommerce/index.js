@@ -35,6 +35,6 @@ app.use('/products', productsRouter);
 app.use("/api/products", productsApiRouter);
 
 //Server init
-const server = app.listen(8000, function() {
-    console.log(`Listening http://localhost:${server.address().port}`);
+const server = app.listen(5000, "0.0.0.0", function() {
+    console.log(`Listening http://0.0.0.0:${server.address().port}`);
 })
