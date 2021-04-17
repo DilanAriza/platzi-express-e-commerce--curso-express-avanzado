@@ -18,7 +18,7 @@ app.set("view engine", "pug");
 
 //Routes files
 const productsRouter = require('./routes/products');
-
+const productsApiRouter = require('./routes/api/products');
 
 app.get('/', function(req, res, next) {
     res.send({ Hello: "World" });
@@ -26,6 +26,7 @@ app.get('/', function(req, res, next) {
 
 //Render routes
 app.use('/products', productsRouter);
+app.use("/api/products", productsApiRouter);
 
 const server = app.listen(8000, function() {
     console.log(`Listening http://localhost:${server.address().port}`);
