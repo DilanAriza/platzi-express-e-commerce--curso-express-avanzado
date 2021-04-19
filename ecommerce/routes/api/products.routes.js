@@ -96,7 +96,7 @@ router.delete('/:productId', async function(req, res) {
     const { productId } = req.params;
     console.log('req', req.params)
     try {
-        const deletedProduct = await productService.updateProduct({ productId })
+        const deletedProduct = await productService.deleteProduct({ productId })
 
         res.status(200).json({
             data: deletedProduct,
