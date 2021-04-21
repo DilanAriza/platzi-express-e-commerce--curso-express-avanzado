@@ -10,11 +10,10 @@ router.get('/', async function(req, res, next) {
 
     try {
         const products = await productService.getProducts({ tags });
-
         res.render("products", { products });
 
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        next(err);
     }
 });
 
