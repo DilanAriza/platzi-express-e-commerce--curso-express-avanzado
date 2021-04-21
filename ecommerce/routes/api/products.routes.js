@@ -6,11 +6,11 @@ const ProductsService = require('../../services/products.services');
 const productService = new ProductsService();
 
 router.get('/', async function(req, res, next) {
-    const { tags } = req.query
-
-    console.log('req', req.query)
+    const { tags } = req.query;
+    console.log('req', req.query);
 
     try {
+        throw new Error('This is an error from the API');
         const products = await productService.getProducts({ tags })
 
         res.status(200).json({
@@ -24,8 +24,8 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/:productId', async function(req, res) {
-    const { productId } = req.params
-    console.log('req', req.params)
+    const { productId } = req.params;
+    console.log('req', req.params);
 
     try {
         const product = await productService.getProduct({ productId })
@@ -40,9 +40,8 @@ router.get('/:productId', async function(req, res) {
 });
 
 router.post('/', async function(req, res) {
-
     const { body: product } = req;
-    console.log('req', req.params)
+    console.log('req', req.params);
 
     try {
         const createdProduct = await productService.createProduct({ product })
@@ -57,9 +56,8 @@ router.post('/', async function(req, res) {
 });
 
 router.put('/:productId', async function(req, res) {
-
     const { productId } = req.params;
-    console.log('req', req.params)
+    console.log('req', req.params);
     const { body: product } = req;
 
     try {
@@ -92,9 +90,9 @@ router.patch('/:productId', async function(req, res, next) {
 })
 
 router.delete('/:productId', async function(req, res) {
-
     const { productId } = req.params;
-    console.log('req', req.params)
+    console.log('req', req.params);
+
     try {
         const deletedProduct = await productService.deleteProduct({ productId })
 

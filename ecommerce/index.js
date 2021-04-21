@@ -6,6 +6,13 @@ const path = require('path');
 const productsRouter = require('./routes/views/products.view'); // View Products
 const productsApiRouter = require('./routes/api/products.routes'); // Api Products
 
+// Errors middlwares
+const {
+    logErrors,
+    clientErrorHandler,
+    errorHandler
+} = require('./utils/middlewares/errorsHandlers.middleware')
+
 //app
 const app = express();
 
@@ -33,6 +40,11 @@ app.get('/', function(req, res) {
 //Render routes
 app.use('/products', productsRouter);
 app.use("/api/products", productsApiRouter);
+
+//Errors handlers
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
 
 //Server init
 const server = app.listen(8000, function() {
