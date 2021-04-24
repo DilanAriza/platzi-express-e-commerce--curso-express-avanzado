@@ -8,13 +8,13 @@ passport.use(
     new BasicStrategy(async function(username, password, cb) {
         const mongoDB = new MongoLib();
         try {
-            const [user] = await MongoDb.getAll("users", { username });
+            const [user] = await mongoDB.getAll("users", { username });
 
             if (!user) {
                 return cb(Boom.unauthorized(), false);
             }
 
-            if (!(await bcrypt.compare(passport, user.password))) {
+            if (!(await bcrypt.compare(password, user.password))) {
                 return cb(Boom.unauthorized(), false);
             }
 
@@ -23,7 +23,7 @@ passport.use(
             return cb(null, user);
 
         } catch (error) {
-            return cb(error);
+            return cb(error, false);
         }
     })
 )

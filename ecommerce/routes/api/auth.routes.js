@@ -12,7 +12,6 @@ require('../../utils/auth/strategies/basic');
 api.post("/token", async function(req, res, next) {
     passport.authenticate("basic", function(error, user) {
         try {
-
             if (error || !user) {
                 next(Boom.unauthorized());
             }
@@ -27,11 +26,8 @@ api.post("/token", async function(req, res, next) {
                     expiresIn: "15m"
                 });
 
-                return res.status(200).json({
-                    access_token: token
-                });
-            })
-
+                return res.status(200).json({ access_token: token });
+            });
         } catch (error) {
             next(error);
         }
