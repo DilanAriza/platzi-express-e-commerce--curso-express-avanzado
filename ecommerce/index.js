@@ -6,6 +6,7 @@ const Boom = require('@hapi/boom');
 //Routes
 const productsRouter = require('./routes/views/products.view'); // View Products
 const productsApiRouter = require('./routes/api/products.routes'); // Api Products
+const authApiRouter = require('./routes/api/auth.routes'); // Api Auth
 
 // Errors middlwares
 const {
@@ -30,20 +31,21 @@ app.use("/static",
     express.static(
         path.join(__dirname, "public")
     )
-)
+);
 
 //Engine views
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "pug");
 
-//Render routes
+//Routes
 app.use('/products', productsRouter);
 app.use("/api/products", productsApiRouter);
+app.use("/api/auth", authApiRouter);
 
 //Redirect
 app.get('/', function(req, res) {
     res.redirect("/products");
-})
+});
 
 // 404 error with boom or default function
 app.use(function(req, res, next) {
@@ -56,8 +58,7 @@ app.use(function(req, res, next) {
     }
 
     res.status(404).render("404");
-})
-
+});
 
 //Errors handlers
 app.use(logErrors);
