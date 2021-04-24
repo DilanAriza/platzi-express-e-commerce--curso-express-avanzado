@@ -1,6 +1,7 @@
 // Libs
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 //Middlewares
 const validation = require('../../utils/middlewares/validationHandler.middleware');
@@ -19,6 +20,8 @@ const {
     updateProductSchema
 } = require('../../utils/schemas/products.schema');
 
+//JWT strategie
+require('../../utils/auth/strategies/jwt');
 
 /**
  * Routes
@@ -88,6 +91,7 @@ router.post('/', (req, res, next) => {
 
 router.put(
     '/:productId',
+    passport.authenticate("jwt", { session: false }),
     validation({ productId: productIdSchema }, "params"),
     validation(updateProductSchema),
     async function(req, res) {
@@ -109,6 +113,7 @@ router.put(
 
 router.patch(
     '/:productId',
+    passport.authenticate("jwt", { session: false }),
     validation({ productId: productIdSchema }, "params"),
     async function(req, res, next) {
         const { productId } = req.params;
@@ -129,6 +134,7 @@ router.patch(
 
 router.delete(
     '/:productId',
+    passport.authenticate("jwt", { session: false }),
     validation({ productId: productIdSchema }, "params"),
     async function(req, res) {
         const { productId } = req.params;
