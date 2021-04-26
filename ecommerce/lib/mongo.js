@@ -1,4 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb')
+const debug = require('debug')("app:mongo")
 const { config } = require('../config');
 
 const USER = encodeURIComponent(config.dbUser);
@@ -21,7 +22,7 @@ class MongoLib {
                         reject(error);
                     }
 
-                    console.log('Connected successfully to mongo');
+                    debug('Connected successfully to mongo');
                     resolve(this.client.db(this.dbName))
                 })
             })
@@ -45,7 +46,7 @@ class MongoLib {
                     .collection(collection).findOne({ _id: ObjectId(id) })
             })
             .catch(err => {
-                console.log(err);
+                debug(err);
             })
     }
 
@@ -56,7 +57,7 @@ class MongoLib {
             })
             .then(result => result.insertedId)
             .catch(err => {
-                console.log(err);
+                debug(err);
             })
     }
 
@@ -69,7 +70,7 @@ class MongoLib {
             })
             .then(result => result.upsertedId || id)
             .catch(err => {
-                console.log(err);
+                debug(err);
             })
     }
 
@@ -81,7 +82,7 @@ class MongoLib {
             })
             .then(() => id)
             .catch(err => {
-                console.log(err);
+                debug(err);
             })
     }
 }

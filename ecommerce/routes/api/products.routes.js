@@ -77,10 +77,7 @@ function productsApi(app) {
         }
     );
 
-    router.post('/', (req, res, next) => {
-            console.log(req.body);
-            next();
-        },
+    router.post('/',
         validation(createProductSchema), async function(req, res) {
             const { body: product } = req;
 

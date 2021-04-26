@@ -1,6 +1,8 @@
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
-const Boom = require('@hapi/boom')
+const Boom = require('@hapi/boom');
+
+const debug = require('debug')("app:error")
 
 //Config
 const { config } = require('../../config');
@@ -29,7 +31,7 @@ function withErrorStack(err, stack) {
 
 function logErrors(err, req, res, next) {
     Sentry.captureException(err);
-    console.log(err.stack);
+    debug(err.stack);
     transaction.finish()
     next(err);
 }
