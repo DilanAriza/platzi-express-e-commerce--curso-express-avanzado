@@ -14,7 +14,7 @@ const {
 
 
 // el ".only" nunca debe ir al repo, ya que esto no permite la utilización de los demas test
-describe.only('services - products', () => {
+describe('services - products', () => {
     const ProductsService = proxyQuire('../services/products.services', {
         '../lib/mongo': MongoLibMock
     });
