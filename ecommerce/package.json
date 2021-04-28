@@ -9,7 +9,7 @@
         "dev:inspect": "nodemon --inspect index",
         "dev:debug": "DEBUG=express:*,app:* npm run dev",
         "debug": "DEBUG=express:*,app:* npm run start",
-        "test": "mocha",
+        "test": "mocha --exit",
         "coverage": "nyc --reporter=lcov --reporter=text npm run test"
     },
     "nyc": {

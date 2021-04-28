@@ -63,8 +63,20 @@ class ProductsServiceMock {
         return Promise.resolve(productsMock);
     }
 
+    async getProduct() {
+        return Promise.resolve(productsMock[0]);
+    }
+
     async createProduct() {
-        return Promise.resolve("6bedb1267d1ca7f3053e2875");
+        return Promise.resolve('6bedb1267d1ca7f3053e2875');
+    }
+
+    async updateProduct() {
+        return Promise.resolve('6086d7fa40ef33219a01435b');
+    }
+
+    async deleteProduct() {
+        return Promise.resolve('6086d7de40ef33219a01435a');
     }
 }
 
