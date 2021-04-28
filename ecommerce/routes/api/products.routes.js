@@ -45,7 +45,7 @@ function productsApi(app) {
     router.get('/', async function(req, res, next) {
         const { tags } = req.query;
 
-        tagsArray = tags.split(',');
+        (tags) ? tagsArray = tags.split(','): tagsArray = [];
 
         try {
             const products = await productService.getProducts({ tagsArray });
