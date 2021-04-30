@@ -126,7 +126,7 @@ function productsApi(app) {
             const { body: changedAttributes } = req;
 
             try {
-                const patchedProduct = await productService.patchProduct({ productId, changedAttributes });
+                const patchedProduct = await productService.updateProduct({ productId, changedAttributes });
 
                 res.status(200).json({
                     data: patchedProduct,

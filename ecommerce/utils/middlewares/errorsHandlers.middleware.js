@@ -38,13 +38,14 @@ function logErrors(err, req, res, next) {
 
 function wrapErrors(err, req, res, next) {
     if (!err.isBoom) {
-        next(boom.badImplementation(err));
+        next(Boom.badImplementation(err));
     }
 
     next(err);
 }
 
 function clientErrorHandler(err, req, res, next) {
+    console.log(err);
     const {
         output: { statusCode, payload }
     } = err;
