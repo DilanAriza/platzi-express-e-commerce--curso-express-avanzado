@@ -18,6 +18,7 @@ const {
 } = require('./utils/middlewares/errorsHandlers.middleware')
 
 const isRequestAjaxOrApi = require('./utils/singleUtils/isRequestAjaxOrApi');
+const authApi = require('./routes/api/auth.routes');
 
 //app
 const app = express();
@@ -41,7 +42,7 @@ app.set("view engine", "pug");
 //Routes
 app.use('/products', productsRouter);
 productsApiRouter(app);
-app.use("/api/auth", authApiRouter);
+authApi(app);
 
 //Redirect
 app.get('/', function(req, res) {
