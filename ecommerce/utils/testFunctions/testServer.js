@@ -6,5 +6,4 @@ function testServer(route) {
     route(app);
     return supertest(app);
 }
-
 module.exports = testServer;
