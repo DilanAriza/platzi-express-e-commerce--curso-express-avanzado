@@ -39,13 +39,12 @@ function logErrors(err, req, res, next) {
 function wrapErrors(err, req, res, next) {
     if (!err.isBoom) {
         next(Boom.badImplementation(err));
+    } else {
+        next(err);
     }
-
-    next(err);
 }
 
 function clientErrorHandler(err, req, res, next) {
-    console.log(err);
     const {
         output: { statusCode, payload }
     } = err;
@@ -68,6 +67,7 @@ function errorHandler(err, req, res, next) {
 }
 
 module.exports = {
+    withErrorStack,
     logErrors,
     wrapErrors,
     clientErrorHandler,
