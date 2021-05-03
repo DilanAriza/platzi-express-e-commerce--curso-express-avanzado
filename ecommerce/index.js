@@ -4,10 +4,13 @@ const path = require('path');
 const Boom = require('@hapi/boom');
 const debug = require('debug')("app:server")
 
+const helmet = require('helmet');
+const cors = require('cors');
+
 //Routes
 const productsRouter = require('./routes/views/products.view'); // View Products
-const productsApiRouter = require('./routes/api/products.routes'); // Api Products
-const authApiRouter = require('./routes/api/auth.routes'); // Api Auth
+const productsApiRouter = require('./routes/api/products.routes'); // Api Products 
+const authApi = require('./routes/api/auth.routes'); // Api Auth
 
 // Errors middlwares
 const {
@@ -18,12 +21,31 @@ const {
 } = require('./utils/middlewares/errorsHandlers.middleware')
 
 const isRequestAjaxOrApi = require('./utils/singleUtils/isRequestAjaxOrApi');
-const authApi = require('./routes/api/auth.routes');
 
 //app
 const app = express();
 
+//Config Cors
+// const whiteList = ['https://images.unsplash.com', '*']
+
+// var corsOptions = {
+//     origin: function(origin, callback) {
+//         if (whiteList.indexOf(origin) !== -1 || !origin) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// };
+
+
 // MIDDLWARES
+// app.use(cors(corsOptions));
+app.use(cors({ allowedHeaders: '*', origin: '*' }))
+
+//Helmet
+app.use(helmet());
+
 //Json API Integred
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))

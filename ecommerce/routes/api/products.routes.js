@@ -8,6 +8,10 @@ const validation = require('../../utils/middlewares/validationHandler.middleware
 //Services libs
 const ProductsService = require('../../services/products.services');
 
+//Functions
+const cacheResponse = require('../../utils/singleUtils/cacheResponse');
+const { FIVE_MINUTES_IN_SECONDS, SIXTY_MINUTES_IN_SECONDS } = require('../../utils/singleUtils/time');
+
 //Schema validation
 const {
     productIdSchema,
@@ -43,6 +47,7 @@ function productsApi(app) {
      *  - [DELETE] [SINGLE] product
      */
     router.get('/', async function(req, res, next) {
+        cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
         const { tags } = req.query;
 
         (tags) ? tagsArray = tags.split(','): tagsArray = [];
@@ -64,6 +69,8 @@ function productsApi(app) {
         '/:productId',
         validation({ productId: productIdSchema }, "params"),
         async function(req, res) {
+
+            cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
             const { productId } = req.params;
 
             try {
