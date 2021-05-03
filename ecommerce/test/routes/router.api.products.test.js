@@ -2,19 +2,19 @@ const assert = require('assert');
 const { expect } = require('chai');
 const httpStatus = require('http-status');
 const proxyquire = require('proxyquire');
-const { config } = require('../config');
+const { config } = require('../../config');
 
 const {
     productsMock,
     ProductsServiceMock,
     filteredProductsMock
-} = require('../utils/mocks/products.mocks');
+} = require('../../utils/mocks/products.mocks');
 
-const testServer = require('../utils/testFunctions/testServer');
+const testServer = require('../../utils/testFunctions/testServer');
 
 describe('routes - api - products', () => {
 
-    const route = proxyquire('../routes/api/products.routes', {
+    const route = proxyquire('../../routes/api/products.routes', {
         "../../services/products.services": ProductsServiceMock
     });
 

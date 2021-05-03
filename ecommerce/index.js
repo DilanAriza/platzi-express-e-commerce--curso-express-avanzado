@@ -40,7 +40,7 @@ app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "pug");
 
 //Routes
-app.use('/products', productsRouter);
+productsRouter(app);
 productsApiRouter(app);
 authApi(app);
 

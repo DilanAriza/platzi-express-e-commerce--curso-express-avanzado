@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { expect } = require('chai');
-const MongoLib = require('../lib/mongo');
-const productsMock = require('../utils/mocks/products.mocks');
+const MongoLib = require('../../lib/mongo');
+const productsMock = require('../../utils/mocks/products.mocks');
 
 const generalObjectToTestingItems = {
     "name": "item 1",
@@ -36,7 +36,7 @@ describe('libs - mongo', () => {
 
             expect(productsTestingConnection).to.be.an('array');
             expect(result).to.equal(expected);
-        }).timeout(30000);
+        }).timeout(40000);
 
     });
 

@@ -1,20 +1,29 @@
 const express = require('express');
-const router = express.Router();
 
 const ProductsService = require('../../services/products.services');
 
-const productService = new ProductsService();
 
-router.get('/', async function(req, res, next) {
-    const { tags } = req.query
+function productsRouter(app) {
+    //Libs
+    const router = express.Router();
+    app.use("/products", router);
 
-    try {
-        const products = await productService.getProducts({ tags });
-        res.render("products", { products });
+    const productService = new ProductsService();
 
-    } catch (err) {
-        next(err);
-    }
-});
+    router.get('/', async function(req, res, next) {
+        const { tags } = req.query;
 
-module.exports = router;
+        (tags) ? tagsArray = tags.split(','): tagsArray = [];
+
+        try {
+            const products = await productService.getProducts({ tagsArray });
+            res.render("products", { products });
+
+        } catch (err) {
+            console.log(err);
+            next(err);
+        }
+    });
+}
+
+module.exports = productsRouter;

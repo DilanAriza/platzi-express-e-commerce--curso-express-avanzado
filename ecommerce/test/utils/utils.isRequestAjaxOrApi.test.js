@@ -1,5 +1,5 @@
 const assert = require('assert');
-const isRequestAjaxOrApi = require('../utils/singleUtils/isRequestAjaxOrApi');
+const isRequestAjaxOrApi = require('../../utils/singleUtils/isRequestAjaxOrApi');
 
 describe('utils - isRequestAjaxOrApi', () => {
     describe('when req accepts html and is not and XMHHttpRequest', () => {

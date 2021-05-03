@@ -7,18 +7,18 @@ const {
     productStub,
     updateStub,
     deleteStub
-} = require('../utils/mocks/mongoLib.mocks');
+} = require('../../utils/mocks/mongoLib.mocks');
 
 const {
     productsMock,
     filteredProductsMock,
     ProductsServiceMock
-} = require('../utils/mocks/products.mocks');
+} = require('../../utils/mocks/products.mocks');
 
 
 // el ".only" nunca debe ir al repo, ya que esto no permite la utilización de los demas test
 describe('services - products', () => {
-    const ProductsService = proxyQuire('../services/products.services', {
+    const ProductsService = proxyQuire('../../services/products.services', {
         '../lib/mongo': MongoLibMock
     });
 
